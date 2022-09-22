@@ -21,7 +21,7 @@ public class Person {
         int dayP = this.dateOfBirth.day;
         int monthP = this.dateOfBirth.month;
         int yearP = this.dateOfBirth.year;
-        int age = 0;
+        int age ;
         if(month>=monthP){
             if(day>=dayP){
                 age = year-yearP;
