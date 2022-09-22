@@ -11,7 +11,7 @@ public class Person {
         this.dateOfBirth= new Date(day,month,year);
     }
     public String toString(){
-        return "Firstname : "+this.firstName+"\nLastname : "+this.lastName+"\nDate of birth : "+this.dateOfBirth.toString()+"\nAge  : "+getAge();
+        return "Firstname : "+this.firstName+"\nLastname : "+this.lastName+"\nDate of birth : "+this.dateOfBirth.toString()+" | "+this.dateOfBirth.day()+"/"+this.dateOfBirth.month()+"/"+this.dateOfBirth.year+"\nAge  : "+getAge();
     }
     public int getAge(){
         LocalDate today = LocalDate.now();
