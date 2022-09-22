@@ -76,7 +76,7 @@ public class Date {
 
         return somme;
     }
-    public int dayOfWeek(){
+    private int dayOfWeek(){
         int day,month,year,zeller,k,j;
         day = this.day;
         month = this.month;
