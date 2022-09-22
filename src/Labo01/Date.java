@@ -14,10 +14,13 @@ public class Date {
             switch (month){
                 case 1,2,3,4,5,6,7,8,9,10,11 :
                     month++;
+                    day = 1;
+                    break ;
                 case 12 :
                     year++;
                     month=1;
                     day = 1;
+                    break ;
 
             }
 
