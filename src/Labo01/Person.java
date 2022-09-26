@@ -11,28 +11,28 @@ public class Person {
         this.dateOfBirth= new Date(day,month,year);
     }
     public String toString(){
-        return "Firstname : "+this.firstName+"\nLastname : "+this.lastName+"\nDate of birth : "+this.dateOfBirth.toString()+" | "+this.dateOfBirth.day()+"/"+this.dateOfBirth.month()+"/"+this.dateOfBirth.year+"\nAge  : "+getAge();
+        return "Firstname : "+this.firstName+"\nLastname : "+this.lastName+"\nDate of birth : "+this.dateOfBirth.toString()+" | "+this.dateOfBirth.day()+"/"+this.dateOfBirth.month()+"/"+dateOfBirth.getYear()+"\nAge  : "+getAge();
     }
     public int getAge(){
         LocalDate today = LocalDate.now();
         int day = today.getDayOfMonth();
         int month = today.getMonthValue();
         int year = today.getYear();
-        int dayP = this.dateOfBirth.day;
-        int monthP = this.dateOfBirth.month;
-        int yearP = this.dateOfBirth.year;
+        int dayP = dateOfBirth.getDay();
+        int monthP = dateOfBirth.getMonth();
+        int yearP = dateOfBirth.getYear();
         int age ;
-        if(month>=monthP){
-            if(day>=dayP){
-                age = year-yearP;
+        if(month>= dateOfBirth.getMonth()){
+            if(day>= dateOfBirth.getDay()){
+                age = year- dateOfBirth.getYear();
             }
             else{
-                age = year-yearP-1;
+                age = year- dateOfBirth.getYear()-1;
 
             }
         }
         else {
-            age = year-yearP-1;
+            age = year- dateOfBirth.getYear()-1;
         }
         return age;
 

@@ -1,12 +1,48 @@
 package Labo01;
 
 public class Date {
-    public int day,month,year;
+    private int day,month,year;
+    public void setDay(int day){
+        if(day<1||day>31){
+            throw new RuntimeException("The day of a date is between 1 and 31");
 
-    public Date (int day,int month,int year){
-        this.day= day;
-        this.month = month;
-        this.year =year;
+        }
+        else {
+            this.day= day;
+        }
+
+    }
+    public int getDay(){
+
+        return day;
+    }
+    public void setMonth(int month){
+        if(month<1||month>12){
+            throw new RuntimeException("The month of a date is between 1 and 12");
+        }
+        else{
+            this.month = month;
+        }
+    }
+    public int getMonth(){
+
+        return month;
+    }
+
+    public void setYear(int year) {
+
+        this.year = year;
+    }
+    public int getYear(){
+
+        return this.year;
+    }
+
+    public Date (int day, int month, int year){
+
+      this.setMonth(month);
+      this.setYear(year);
+        this.setDay(day);
 
     }
     public void increment(){
