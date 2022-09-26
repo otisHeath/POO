@@ -1,15 +1,17 @@
 package Labo01;
+import java.time.LocalDate;
 
 public class Date {
     private int day,month,year;
     public void setDay(int day){
-        if(day<1||day>31){
-            throw new RuntimeException("The day of a date is between 1 and 31");
+        if(day<1||day>daysInMonth(month,year)){
+            throw new RuntimeException("The day of a date is between 1 and "+daysInMonth(month,year));
 
         }
         else {
             this.day= day;
         }
+
 
     }
     public int getDay(){
@@ -30,6 +32,13 @@ public class Date {
     }
 
     public void setYear(int year) {
+        if(!isLeapYear(year)){
+            if(month==2){
+                if(day>daysInMonth(month,year)){
+                    throw  new RuntimeException("The year want to set is not compatible with the date ");
+                }
+            }
+        }
 
         this.year = year;
     }
@@ -44,6 +53,15 @@ public class Date {
       this.setYear(year);
         this.setDay(day);
 
+    }
+    public Date (){
+        LocalDate today = LocalDate.now();
+        int day = today.getDayOfMonth();
+        int month = today.getMonthValue();
+        int year = today.getYear();
+        this.setDay(day);
+        this.setMonth(month);
+        this.setYear(year);
     }
     public void increment(){
         if(estDernierJour()){
@@ -68,6 +86,23 @@ public class Date {
 
 
     }
+    public static boolean isLeapYear(int year){
+        return (year%4==0&&year%100!=0)||year%400==0;
+
+
+
+    }
+    public static int daysInMonth(int month,int year){
+        month--;
+        int monthTab[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+        if(isLeapYear(year)){
+            monthTab[1] =29;
+        }
+        return monthTab[month];
+    }
+
+
+
     public int dayOfYear(){
         int somme = 0;
         if(!estBissextile()){
@@ -279,8 +314,8 @@ public class Date {
 
 
     public  boolean estBissextile(){
+        return isLeapYear(year);
 
-        return (year%4==0&&year%100!=0)||year%400==0;
     }
     public String month(){
         String mois ="";

@@ -2,7 +2,7 @@ package Labo01;
 import static Utile.Lire.*;
 public class TestDate {
     public static void main(String[] args) {
-        Date d = new Date(30,7,2022);
+      /*  Date d = new Date(30,7,2022);
         System.out.println(d.toString());
         d.prettyPrint();
         d.increment();
@@ -21,7 +21,12 @@ public class TestDate {
         Person p = new Person(firstName,lastName,day,month,year);
         System.out.println(p.toString());
 
-
+*/
+        Date d = new Date(28,2,2012);
+        d.setYear(2005);
+        System.out.println(d);
+        Date today = new Date();
+        System.out.println(today.toString());
 
     }
 }
