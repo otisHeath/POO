@@ -10,7 +10,7 @@ public class Date {
 
     }
     public void increment(){
-        if(estDernierJour(day,month,year)){
+        if(estDernierJour()){
             switch (month){
                 case 1,2,3,4,5,6,7,8,9,10,11 :
                     month++;
@@ -34,7 +34,7 @@ public class Date {
     }
     public int dayOfYear(){
         int somme = 0;
-        if(!estBissextile(year)){
+        if(!estBissextile()){
    for(int i = 1;i<month;i++){
        switch(i){
            case 1,3,5,7,8,10,12 :
@@ -191,9 +191,9 @@ public class Date {
 
 
     }
-    public boolean estDernierJour(int day,int month,int année) {
+    public boolean estDernierJour() {
         boolean reponse = false;
-        if (estBissextile(année)) {
+        if (estBissextile()) {
             switch (month) {
                 case 1, 3, 5, 7, 8, 10, 12:
                     if (day == 31) {
@@ -242,9 +242,9 @@ public class Date {
     }
 
 
-    public  boolean estBissextile(int année){
+    public  boolean estBissextile(){
 
-        return (année%4==0&&année%100!=0)||année%400==0;
+        return (year%4==0&&year%100!=0)||year%400==0;
     }
     public String month(){
         String mois ="";
