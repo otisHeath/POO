@@ -3,9 +3,34 @@ package Labo01;
 import java.time.LocalDate;
 
 public class Person {
-    public String firstName,lastName;
-    public Date dateOfBirth;
-    public Person(String firstName,String lastName,int day,int month,int year){
+    private String firstName,lastName;
+    private Date dateOfBirth;
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Person(String firstName, String lastName, int day, int month, int year){
         this.firstName=firstName;
         this.lastName=lastName;
         this.dateOfBirth= new Date(day,month,year);
