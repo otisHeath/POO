@@ -55,10 +55,8 @@ public class Date {
 
     }
     public Date (){
-        LocalDate today = LocalDate.now();
-        this.day = today.getDayOfMonth();
-        this.month= today.getMonthValue();
-        this.year= today.getYear();
+        this(LocalDate.now().getDayOfMonth(),LocalDate.now().getMonthValue(),LocalDate.now().getYear() );
+
     }
     public void increment(){
         if(estDernierJour()){
