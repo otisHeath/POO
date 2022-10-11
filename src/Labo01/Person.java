@@ -2,7 +2,7 @@ package Labo01;
 
 import java.time.LocalDate;
 
-public class Person {
+public class Person implements  Comparable<Person>{
     private String firstName,lastName;
     private Date dateOfBirth;
 
@@ -65,4 +65,10 @@ public class Person {
 
 
     }
+    @Override
+    public int compareTo(Person p){
+       return -(this.dateOfBirth.compareTo(p.dateOfBirth));
+       // return <0 si la personne est plus agé,>0 si la personne est plus jeune
+    }
+
 }

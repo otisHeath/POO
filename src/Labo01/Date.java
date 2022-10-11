@@ -1,134 +1,142 @@
 package Labo01;
 import java.time.LocalDate;
 
-public class Date {
-    private int day,month,year;
-    public void setDay(int day){
-        if(day<1||day>daysInMonth(month,year)){
-            throw new RuntimeException("The day of a date is between 1 and "+daysInMonth(month,year));
+public class Date implements  Comparable<Date> {
+    private int day, month, year;
 
-        }
-        else {
-            this.day= day;
+    public void setDay(int day) {
+        if (day < 1 || day > daysInMonth(month, year)) {
+            throw new RuntimeException("The day of a date is between 1 and " + daysInMonth(month, year));
+
+        } else {
+            this.day = day;
         }
 
 
     }
-    public int getDay(){
+
+    public int getDay() {
 
         return day;
     }
-    public void setMonth(int month){
-        if(month<1||month>12){
+
+    public void setMonth(int month) {
+        if (month < 1 || month > 12) {
+
             throw new RuntimeException("The month of a date is between 1 and 12");
-        }
-        else{
+
+        } else {
+            if (day > daysInMonth(month, year)) {
+                throw new RuntimeException("The month of a date is between 1 and 12");
+            }
             this.month = month;
         }
     }
-    public int getMonth(){
+
+    public int getMonth() {
 
         return month;
     }
 
     public void setYear(int year) {
-        if(!isLeapYear(year)){
-            if(month==2){
-                if(day>daysInMonth(month,year)){
-                    throw  new RuntimeException("The year want to set is not compatible with the date ");
+        if (!isLeapYear(year)) {
+            if (month == 2) {
+                if (day > daysInMonth(month, year)) {
+                    throw new RuntimeException("The year want to set is not compatible with the date ");
                 }
             }
         }
 
         this.year = year;
     }
-    public int getYear(){
+
+    public int getYear() {
 
         return this.year;
     }
 
-    public Date (int day, int month, int year){
+    public Date(int day, int month, int year) {
 
-      this.setMonth(month);
-      this.setYear(year);
+        this.setMonth(month);
+        this.setYear(year);
         this.setDay(day);
 
     }
-    public Date (){
-        this(LocalDate.now().getDayOfMonth(),LocalDate.now().getMonthValue(),LocalDate.now().getYear() );
+
+    public Date() {
+        this(LocalDate.now().getDayOfMonth(), LocalDate.now().getMonthValue(), LocalDate.now().getYear());
 
     }
-    public void increment(){
-        if(estDernierJour()){
-            switch (month){
-                case 1,2,3,4,5,6,7,8,9,10,11 :
+
+    public void increment() {
+        if (estDernierJour()) {
+            switch (month) {
+                case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11:
                     month++;
                     day = 1;
-                    break ;
-                case 12 :
+                    break;
+                case 12:
                     year++;
-                    month=1;
+                    month = 1;
                     day = 1;
-                    break ;
+                    break;
 
             }
 
 
-        }
-        else{
+        } else {
             day++;
         }
 
 
     }
-    public static boolean isLeapYear(int year){
-        return (year%4==0&&year%100!=0)||year%400==0;
 
+    public static boolean isLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 
 
     }
-    public static int daysInMonth(int month,int year){
+
+    public static int daysInMonth(int month, int year) {
         month--;
-        int monthTab[] = {31,28,31,30,31,30,31,31,30,31,30,31};
-        if(isLeapYear(year)){
-            monthTab[1] =29;
+        int monthTab[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        if (isLeapYear(year)) {
+            monthTab[1] = 29;
         }
         return monthTab[month];
     }
 
 
-
-    public int dayOfYear(){
+    public int dayOfYear() {
         int somme = 0;
-        if(!estBissextile()){
-   for(int i = 1;i<month;i++){
-       switch(i){
-           case 1,3,5,7,8,10,12 :
-               somme += 31;
-               break;
-           case 4,6,9,11 :
-               somme += 30;
-               break;
-           case 2 :
-               somme +=28;
-               break;
-
-
-       }
-
-   }
-        }
-        else{
-            for(int i = 1;i<month;i++){
-                switch(i){
-                    case 1,3,5,7,8,10,12 :
+        if (!estBissextile()) {
+            for (int i = 1; i < month; i++) {
+                switch (i) {
+                    case 1, 3, 5, 7, 8, 10, 12:
                         somme += 31;
                         break;
-                    case 4,6,9,11 :
+                    case 4, 6, 9, 11:
                         somme += 30;
                         break;
-                    case 2 :
-                        somme +=29;
+                    case 2:
+                        somme += 28;
+                        break;
+
+
+                }
+
+            }
+        } else {
+            for (int i = 1; i < month; i++) {
+                switch (i) {
+                    case 1, 3, 5, 7, 8, 10, 12:
+                        somme += 31;
+                        break;
+                    case 4, 6, 9, 11:
+                        somme += 30;
+                        break;
+                    case 2:
+                        somme += 29;
                         break;
 
 
@@ -138,102 +146,99 @@ public class Date {
 
 
         }
-   somme+= day;
+        somme += day;
 
         return somme;
     }
-    private int dayOfWeek(){
-        int day,month,year,zeller,k,j;
+
+    private int dayOfWeek() {
+        int day, month, year, zeller, k, j;
         day = this.day;
         month = this.month;
         year = this.year;
-        switch (month){
-            case 1 :
+        switch (month) {
+            case 1:
                 month = 13;
                 year--;
                 break;
-            case 2 :
+            case 2:
                 month = 14;
                 year--;
                 break;
         }
-        j = year/100;
-        k=year%100;
-        zeller = (day + ((month+1)*13)/5 + k + (k/4) + (j/4) + (5*j))%7;
-
+        j = year / 100;
+        k = year % 100;
+        zeller = (day + ((month + 1) * 13) / 5 + k + (k / 4) + (j / 4) + (5 * j)) % 7;
 
 
         return zeller;
     }
-    public String toString(){
+
+    public String toString() {
         int zeller = dayOfWeek();
-        String mois ="";
+        String mois = "";
         String jour = "";
-        String numero ="";
-        switch(zeller){
-            case 0 :
-                jour = "Samedi" ;
-                break ;
-            case 1 :
+        String numero = "";
+        switch (zeller) {
+            case 0:
+                jour = "Samedi";
+                break;
+            case 1:
                 jour = "Dimanche";
                 break;
-            case 2 :
-                jour = "Lundi" ;
-                break ;
-            case 3 :
-                jour = "Mardi" ;
-                break ;
-            case 4 :
+            case 2:
+                jour = "Lundi";
+                break;
+            case 3:
+                jour = "Mardi";
+                break;
+            case 4:
                 jour = "Mercredi";
-                break ;
-            case 5 :
+                break;
+            case 5:
                 jour = "Jeudi";
-                break ;
-            case 6 :
-                jour = "Vendredi" ;
+                break;
+            case 6:
+                jour = "Vendredi";
 
         }
-        switch(month) {
-            case 1 :
+        switch (month) {
+            case 1:
                 mois = "Janvier";
-                break ;
-            case 2 :
-                mois = "Février" ;
-                break ;
-            case 3 :
-                mois = "Mars" ;
-                break ;
-            case 4 :
+                break;
+            case 2:
+                mois = "Février";
+                break;
+            case 3:
+                mois = "Mars";
+                break;
+            case 4:
                 mois = "Avril";
-                break ;
-            case 5 :
-                mois ="Mai";
-                break ;
-            case 6 :
+                break;
+            case 5:
+                mois = "Mai";
+                break;
+            case 6:
                 mois = "Juin";
-                break ;
-            case 7 :
+                break;
+            case 7:
                 mois = "Juillet";
-                break ;
-            case 8 :
-                mois ="Aout";
-                break ;
-            case 9 :
-                mois ="Septembre";
-                break ;
-            case 10 :
-                mois ="Octobre" ;
-                break ;
-            case 11 :
-                mois ="Novembre";
-                break ;
-            case 12 :
-                mois ="Décembre";
-                break ;
-
-
-
-
+                break;
+            case 8:
+                mois = "Aout";
+                break;
+            case 9:
+                mois = "Septembre";
+                break;
+            case 10:
+                mois = "Octobre";
+                break;
+            case 11:
+                mois = "Novembre";
+                break;
+            case 12:
+                mois = "Décembre";
+                break;
 
 
         }
@@ -250,13 +255,15 @@ public class Date {
             default -> Integer.toString(day);
         };
 
-        return jour+", "+numero+" "+mois+" "+year;
+        return jour + ", " + numero + " " + mois + " " + year;
     }
-    public void prettyPrint(){
-        System.out.println(day()+"/"+month()+"/"+year);
+
+    public void prettyPrint() {
+        System.out.println(day() + "/" + month() + "/" + year);
 
 
     }
+
     public boolean estDernierJour() {
         boolean reponse = false;
         if (estBissextile()) {
@@ -268,15 +275,15 @@ public class Date {
                     break;
                 case 2:
                     if (day == 29) {
-                        reponse= true;
+                        reponse = true;
                     }
                     break;
                 case 4, 6, 9, 11:
                     if (day == 30) {
-                        reponse= true;
+                        reponse = true;
                     }
                     break;
-                default :
+                default:
                     reponse = false;
             }
 
@@ -285,7 +292,7 @@ public class Date {
             switch (month) {
                 case 1, 3, 5, 7, 8, 10, 12:
                     if (day == 31) {
-                        reponse =  true;
+                        reponse = true;
                     }
                     break;
                 case 2:
@@ -298,7 +305,7 @@ public class Date {
                         reponse = true;
                     }
                     break;
-                default :
+                default:
                     reponse = false;
             }
 
@@ -308,42 +315,43 @@ public class Date {
     }
 
 
-    public  boolean estBissextile(){
+    public boolean estBissextile() {
         return isLeapYear(year);
 
     }
-    public String month(){
-        String mois ="";
 
-        switch(month) {
-            case 1 :
+    public String month() {
+        String mois = "";
+
+        switch (month) {
+            case 1:
                 mois = "01";
-                break ;
-            case 2 :
-                mois = "02" ;
-                break ;
-            case 3 :
-                mois = "03" ;
-                break ;
-            case 4 :
+                break;
+            case 2:
+                mois = "02";
+                break;
+            case 3:
+                mois = "03";
+                break;
+            case 4:
                 mois = "04";
-                break ;
-            case 5 :
-                mois ="05";
-                break ;
-            case 6 :
+                break;
+            case 5:
+                mois = "05";
+                break;
+            case 6:
                 mois = "06";
-                break ;
-            case 7 :
+                break;
+            case 7:
                 mois = "07";
-                break ;
-            case 8 :
-                mois ="08";
-                break ;
-            case 9 :
-                mois ="09";
-                break ;
-            default :
+                break;
+            case 8:
+                mois = "08";
+                break;
+            case 9:
+                mois = "09";
+                break;
+            default:
                 mois = Integer.toString(month);
 
 
@@ -351,21 +359,32 @@ public class Date {
 
         return mois;
     }
-    public String day(){
+
+    public String day() {
 
 
-            String numero = switch (day) {
-                case 1 -> "01";
-                case 2 -> "02";
-                case 3 -> "03";
-                case 4 -> "04";
-                case 5 -> "05";
-                case 6 -> "06";
-                case 7 -> "07";
-                case 8 -> "08";
-                case 9 -> "09";
-                default -> Integer.toString(day);
-            };
+        String numero = switch (day) {
+            case 1 -> "01";
+            case 2 -> "02";
+            case 3 -> "03";
+            case 4 -> "04";
+            case 5 -> "05";
+            case 6 -> "06";
+            case 7 -> "07";
+            case 8 -> "08";
+            case 9 -> "09";
+            default -> Integer.toString(day);
+        };
         return numero;
+    }
+    private int intDate(){
+        return year*10000+month*
+                100+day;
+    }
+
+    @Override
+    public int compareTo(Date d){
+        return this.intDate()-d.intDate();
+
     }
 }

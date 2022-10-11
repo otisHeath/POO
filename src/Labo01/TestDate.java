@@ -1,4 +1,6 @@
 package Labo01;
+import java.util.*;
+
 import static Utile.Lire.*;
 public class TestDate {
     public static void main(String[] args) {
@@ -21,12 +23,33 @@ public class TestDate {
         Person p = new Person(firstName,lastName,day,month,year);
         System.out.println(p.toString());
 
-*/
-        Date d = new Date(28,2,2012);
-        d.setYear(2005);
-        System.out.println(d);
-        Date today = new Date();
-        System.out.println(today.toString());
+
+        ArrayList<Date> tab = new ArrayList<Date>();
+        tab.add(new Date());
+        tab.add(new Date(2,12,2001));
+        tab.add(new Date(1,7,2007));
+        tab.add(new Date(15,2,2004));
+
+        System.out.println(tab);
+        Collections.sort(tab);
+        System.out.println(tab);
+        ArrayList<Person> personArray = new ArrayList<>();
+        personArray.add(new Person("Heath","Otis",5,2,1999));
+        personArray.add(new Person("Yomedan","Joshua",1,1,1999));
+        personArray.add(new Person("Gonzalez","Rayhan",30,6,1999));
+        personArray.add(new Person("Oria","Joshua",25,7,1999));
+
+        System.out.println(personArray);
+        Collections.sort(personArray);
+        System.out.println(personArray);
+
+       */
+        Set<Date> s = new TreeSet<>();
+        s.add(new Date(1,1,1));
+        s.add(new Date(1,1,1));
+        System.out.println(s);
+
+
 
     }
 }
